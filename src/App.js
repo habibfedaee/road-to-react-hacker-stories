@@ -3,11 +3,13 @@ import * as React from "react";
 // our first react component created
 function List(props) {
   return (
-    <ul>
-      {props.list.map(function (item) {
-        return <Item item={item} />;
-      })}
-    </ul>
+    <div>
+      <ul>
+        {props.list.map(function (item) {
+          return <Item item={item} />;
+        })}
+      </ul>
+    </div>
   );
 }
 const Item = (props) => {
@@ -24,22 +26,22 @@ const Item = (props) => {
   );
 };
 function Search() {
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  console.log("Rendering search with SearchTerm: ", searchTerm);
   const handleChange = (event) => {
-    console.log(event);
+    console.log("before: ", searchTerm);
+    setSearchTerm(event.target.value);
+    console.log("after: ", searchTerm);
   };
 
-  const handleMouseOver = (event) => {
-    console.log(event);
-  };
   return (
     <div>
       <label htmlFor="search"> Search: </label>
-      <input
-        id="search"
-        type="text"
-        onChange={handleChange}
-        onMouseOver={handleMouseOver}
-      />
+      <input id="search" type="text" onChange={handleChange} />
+      <p>
+        Searching for <strong>{searchTerm}</strong>
+      </p>
     </div>
   );
 }
